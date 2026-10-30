@@ -1,0 +1,81 @@
+
+<div class="container">
+  <h1>Cadastro de Clientes</h1>
+
+<form #meuForm="ngForm" (ngSubmit)="meuForm.valid && criarCliente()">
+
+    <label>Nome:</label>
+    <input
+      type="text"
+      name="nome"
+      [(ngModel)]="nome"
+      placeholder="Digite o nome"
+      required
+      
+    />
+    <span *ngIf="meuForm.controls['nome']?.invalid && meuForm.controls['nome']?.touched" class="erro">
+      O nome é obrigatório.
+    </span>
+
+    
+
+    <label>E-mail:</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Digite o e-mail"
+      required
+    />
+     <span *ngIf="meuForm.controls['email']?.invalid && meuForm.controls['email']?.touched" class="erro">
+      O email é obrigatório.
+    </span>
+
+    <div class="botoes">
+      <button type="submit" *ngIf="clienteEditado === null">
+        Cadastrar Cliente
+      </button>
+
+      <button type="button" *ngIf="clienteEditado !== null" (click)="salvarEdicao()">
+        Salvar Alterações
+      </button>
+
+      <button type="button" (click)="irParaProdutos()">
+        Login
+      </button>
+    </div>
+
+  </form>
+
+  <hr>
+
+  <h2>Lista de Clientes</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of cliente">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nome }}</td>
+        <td>{{ c.email }}</td>
+        <td>
+          <button type="button" (click)="atualizarCliente(c)">
+            Editar
+          </button>
+
+          <button type="button" (click)="deletarCliente(c.id!)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

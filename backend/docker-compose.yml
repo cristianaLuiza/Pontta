@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: ponta-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: gestao_vendas
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Til@123456
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_dados:/var/lib/mysql
+
+volumes:
+  mysql_dados:
